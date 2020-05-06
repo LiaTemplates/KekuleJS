@@ -9,16 +9,18 @@ language: en
 
 narrator: US English Female
 
+script: http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js
+script: https://cdn.jsdelivr.net/gh/LiaTemplates/KekuleJS//kekule/three.js
 script: https://cdn.jsdelivr.net/gh/LiaTemplates/KekuleJS/kekule/kekule.min.js
 link: https://cdn.jsdelivr.net/gh/LiaTemplates/KekuleJS/kekule/themes/default/kekule.css
 
 @Kekule.molecule2d: @_molecule2d_(@0, @uid)
 
 @_molecule2d_
-<div style="text-align: center" id="molecule_parent_@1"></div>
+<div style="text-align: center" id="molecule_parent1_@1"></div>
 
 <script>
-const div = document.getElementById("molecule_parent_@1");
+const div = document.getElementById("molecule_parent1_@1");
 
 const rawData = `@0`;
 const mol = Kekule.IO.loadFormatData(rawData, 'cml');
@@ -33,21 +35,25 @@ div.appendChild(viewer.getElement());
 @Kekule.molecule3d: @_molecule3d_(@0, @uid)
 
 @_molecule3d_
-<div style="text-align: center" id="molecule_parent3_@1"></div>
+<div style="text-align: center" id="molecule_parent2_@1"></div>
 
 <script>
-const div = document.getElementById("molecule_parent3_@1");
+const div = document.getElementById("molecule_parent2_@1");
 
 const rawData = `@0`;
 const mol = Kekule.IO.loadFormatData(rawData, 'cml');
-var viewer = new Kekule.ChemWidget.Viewer3D(document, mol);
-viewer.setAutofit(true);
-viewer.removeClassName(Kekule.Widget.HtmlClassNames.NORMAL_BACKGROUND);
+var viewer = new Kekule.ChemWidget.Viewer(document);
+
+viewer.setDimension('800px', '800px');
+viewer.setChemObj(mol);
+viewer.setRenderType(Kekule.Render.RendererType.R3D);
+viewer.setZoom(1.5);
+
+viewer.setEnableToolbar(true);
 
 div.appendChild(viewer.getElement());
 </script>
 @end
-
 
 @Kekule.periodicTable: @_periodicTable_(@uid)
 
@@ -194,7 +200,6 @@ block.
 The code above gets interpreted as this molecule:
 
 ``` @Kekule.molecule3d
-<?xml version="1.0"?>
 <cml xmlns="http://www.xml-cml.org/schema">
   <molecule id="m1">
     <atomArray>
