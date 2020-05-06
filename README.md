@@ -187,10 +187,6 @@ block.
       <bond id="b19" order="S" atomRefs2="a12 a20"/>
       <bond id="b24" order="S" atomRefs2="a22 a24"/>
     </bondArray>
-    <metaDataList>
-      <metaData name="generator" content="ChemDraw"/>
-      <metaData name="date" content="@Sat Sep 05 2015 13:46:28 GMT+0200 (Mitteleurop&#xE4;ische Sommerzeit)"/>
-    </metaDataList>
   </molecule>
 </cml>
 ```
@@ -255,10 +251,6 @@ The code above gets interpreted as this molecule:
       <bond id="b19" order="S" atomRefs2="a12 a20"/>
       <bond id="b24" order="S" atomRefs2="a22 a24"/>
     </bondArray>
-    <metaDataList>
-      <metaData name="generator" content="ChemDraw"/>
-      <metaData name="date" content="@Sat Sep 05 2015 13:46:28 GMT+0200 (Mitteleurop&#xE4;ische Sommerzeit)"/>
-    </metaDataList>
   </molecule>
 </cml>
 ```
