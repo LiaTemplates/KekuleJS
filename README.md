@@ -9,8 +9,8 @@ language: en
 
 narrator: US English Female
 
-script: http://127.0.0.1:8000/kekule/kekule.js
-link: http://127.0.0.1:8000/kekule/themes/default/kekule.css
+script: https://cdn.jsdelivr.net/gh/LiaTemplates/KekuleJS/kekule/kekule.min.js
+link: https://cdn.jsdelivr.net/gh/LiaTemplates/KekuleJS/kekule/themes/default/kekule.css
 
 @Kekule.molecule2d: @_molecule2d_(@0, @uid)
 
