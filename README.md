@@ -65,6 +65,8 @@ const div = document.getElementById("periodic_table_@0");
 
 const periodic_table = new Kekule.ChemWidget.PeriodicTable(document);
 
+periodic_table.useMiniMode = true;
+
 periodic_table.setEnableSelect(true)
   .setDisplayedComponents(['symbol', 'name', 'atomicNumber'])
   .appendToElem(div);
