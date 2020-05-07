@@ -262,4 +262,7 @@ The code above gets interpreted as this molecule:
 
 # `@Kekule.periodicTable`
 
+This macro adds a periodic table to the current liaScript page.
+(It has no arguments).
+
 @Kekule.periodicTable
