@@ -17,9 +17,14 @@ link: https://cdn.jsdelivr.net/gh/LiaTemplates/KekuleJS/kekule/themes/default/ke
 @Kekule.molecule2d: @_molecule2d_(@0, @uid)
 
 @_molecule2d_
-<div style="text-align: center" id="molecule_parent1_@1"></div>
+<div style="text-align: center" id="molecule_parent1_@1" class="deleteme"></div>
 
 <script>
+let rem = document.getElementsByClass("deleteme")
+
+alert(rem)
+
+
 const div = document.getElementById("molecule_parent1_@1");
 
 const rawData = `@0`;
@@ -35,9 +40,15 @@ div.appendChild(viewer.getElement());
 @Kekule.molecule3d: @_molecule3d_(@0, @uid)
 
 @_molecule3d_
-<div style="text-align: center" id="molecule_parent2_@1"></div>
+<div style="text-align: center" id="molecule_parent2_@1" class="deleteme"></div>
 
 <script>
+
+let rem = document.getElementByClass("deleteme")
+
+for( let i=0; i< rem.length; i++ )
+  rem[i].innerHTML = ""
+
 const div = document.getElementById("molecule_parent2_@1");
 
 const rawData = `@0`;
@@ -58,9 +69,15 @@ div.appendChild(viewer.getElement());
 @Kekule.periodicTable: @_periodicTable_(@uid)
 
 @_periodicTable_
-<div style="text-align: center" id="periodic_table_@0"></div>
+<div style="text-align: center" id="periodic_table_@0" class="deleteme"></div>
 
 <script>
+
+let rem = document.getElementByClass("deleteme")
+
+for( let i=0; i< rem.length; i++ )
+  rem[i].innerHTML = ""
+
 const div = document.getElementById("periodic_table_@0");
 
 const periodic_table = new Kekule.ChemWidget.PeriodicTable(document);
