@@ -96,6 +96,12 @@ periodic_table.setEnableSelect(true)
 
 # Kekelu JS
 
+Implementation of the the JS library KekuleJS which provides tool for rendering
+molecules and much more chemical notation.
+
+[KekuleJS Source](https://github.com/partridgejiang/Kekule.js/tree/master) <br>
+[LiaScript Page](https://liascript.github.io/course/?https://raw.githubusercontent.com/liaTemplates/KekuleJS/master/README.md#1)
+
 # `@Kekule.molecule2d`
 
 Put the cml representation of the molecule you want to render into markdown
