@@ -20,10 +20,10 @@ link: https://cdn.jsdelivr.net/gh/LiaTemplates/KekuleJS/kekule/themes/default/ke
 <div style="text-align: center" id="molecule_parent1_@1" class="deleteme"></div>
 
 <script>
-let rem = document.getElementsByClass("deleteme")
+let rem = document.getElementsByClassName("deleteme");
 
-alert(rem)
-
+for( let i=0; i< rem.length; i++ )
+  rem[i].innerHTML = "";
 
 const div = document.getElementById("molecule_parent1_@1");
 
@@ -44,10 +44,10 @@ div.appendChild(viewer.getElement());
 
 <script>
 
-let rem = document.getElementByClass("deleteme")
+let rem = document.getElementsByClassName("deleteme");
 
 for( let i=0; i< rem.length; i++ )
-  rem[i].innerHTML = ""
+  rem[i].innerHTML = "";
 
 const div = document.getElementById("molecule_parent2_@1");
 
@@ -66,23 +66,26 @@ div.appendChild(viewer.getElement());
 </script>
 @end
 
-@Kekule.periodicTable: @_periodicTable_(@uid)
+@Kekule.periodicTable: @_periodicTable_(@0, @uid)
 
 @_periodicTable_
-<div style="text-align: center" id="periodic_table_@0" class="deleteme"></div>
+<div style="text-align: center" id="periodic_table_@1" class="deleteme"></div>
 
 <script>
 
-let rem = document.getElementByClass("deleteme")
+let rem = document.getElementsByClassName("deleteme");
 
 for( let i=0; i< rem.length; i++ )
-  rem[i].innerHTML = ""
+  rem[i].innerHTML = "";
 
-const div = document.getElementById("periodic_table_@0");
+const div = document.getElementById("periodic_table_@1");
 
 const periodic_table = new Kekule.ChemWidget.PeriodicTable(document);
 
-periodic_table.useMiniMode = true;
+if("@0" !== "large")
+  periodic_table.useMiniMode = true;
+else
+  periodic_table.useMiniMode = false;
 
 periodic_table.setEnableSelect(true)
   .setDisplayedComponents(['symbol', 'name', 'atomicNumber'])
@@ -284,4 +287,15 @@ The code above gets interpreted as this molecule:
 This macro adds a periodic table to the current liaScript page.
 (It has no arguments).
 
+# `@Kekule.periodicTable`
+This macro adds a periodic table to the current liaScript page.
+
+The first argument of the macro can be used for making the table large.
+Simply type large into the brackets after the macro.
+It is not recommended to put more than one table on the same page.
+
+## `@Kekule.periodicTable - small`
 @Kekule.periodicTable
+
+## `@Kekule.periodicTable(large) - large`
+@Kekule.periodicTable(large)
