@@ -3,16 +3,19 @@ author:   Yannik Höll
 
 email:    labruzzler@gmail.com
 
-version:  0.0.1
+version:  0.0.2
 
 language: en
 
 narrator: US English Female
 
 script: http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js
-script: https://cdn.jsdelivr.net/gh/LiaTemplates/KekuleJS//kekule/three.js
-script: https://cdn.jsdelivr.net/gh/LiaTemplates/KekuleJS/kekule/kekule.min.js
-link: https://cdn.jsdelivr.net/gh/LiaTemplates/KekuleJS/kekule/themes/default/kekule.css
+        https://cdn.jsdelivr.net/gh/LiaTemplates/KekuleJS/kekule/three.js
+        https://cdn.jsdelivr.net/gh/LiaTemplates/KekuleJS/kekule/kekule.min.js
+
+link:   https://cdn.jsdelivr.net/gh/LiaTemplates/KekuleJS/kekule/themes/default/kekule.css
+
+
 
 @Kekule.molecule2d: @_molecule2d_(@0, @uid)
 
@@ -20,31 +23,35 @@ link: https://cdn.jsdelivr.net/gh/LiaTemplates/KekuleJS/kekule/themes/default/ke
 <div style="text-align: center" id="molecule_parent1_@1" class="deleteme"></div>
 
 <script>
-let rem = document.getElementsByClass("deleteme")
+let rem = document.getElementsByClassName("deleteme")
 
-alert(rem)
-
+for( let i=0; i< rem.length; i++ )
+  rem[i].innerHTML = ""
 
 const div = document.getElementById("molecule_parent1_@1");
 
 const rawData = `@0`;
 const mol = Kekule.IO.loadFormatData(rawData, 'cml');
 var viewer = new Kekule.ChemWidget.Viewer2D(document, mol);
-viewer.setAutofit(true);
+
 viewer.removeClassName(Kekule.Widget.HtmlClassNames.NORMAL_BACKGROUND);
 
 div.appendChild(viewer.getElement());
+
+console.log("plotting: ", `@0`)
 </script>
 @end
 
-@Kekule.molecule3d: @_molecule3d_(@0, @uid)
+
+
+
+@Kekule.molecule3d: @_molecule3d_(@0,@uid)
 
 @_molecule3d_
-<div style="text-align: center" id="molecule_parent2_@1" class="deleteme"></div>
+<div data-widget="Kekule.ChemWidget.Viewer" style="width: 100%; height: 550px;" id="molecule_parent2_@1" class="deleteme"></div>
 
 <script>
-
-let rem = document.getElementByClass("deleteme")
+let rem = document.getElementsByClassName("deleteme")
 
 for( let i=0; i< rem.length; i++ )
   rem[i].innerHTML = ""
@@ -52,17 +59,18 @@ for( let i=0; i< rem.length; i++ )
 const div = document.getElementById("molecule_parent2_@1");
 
 const rawData = `@0`;
-const mol = Kekule.IO.loadFormatData(rawData, 'cml');
-var viewer = new Kekule.ChemWidget.Viewer(document);
+let mol = Kekule.IO.loadFormatData(rawData, 'cml');
 
-viewer.setDimension('800px', '800px');
+var viewer = new Kekule.ChemWidget.Viewer(div);
+
 viewer.setChemObj(mol);
-viewer.setRenderType(Kekule.Render.RendererType.R3D);
 viewer.setZoom(1.5);
 
+viewer.setRenderType(Kekule.Render.RendererType.R3D);
+viewer.setAutofit(true);
 viewer.setEnableToolbar(true);
 
-div.appendChild(viewer.getElement());
+console.log("plotting: ",  rawData)
 </script>
 @end
 
@@ -73,7 +81,7 @@ div.appendChild(viewer.getElement());
 
 <script>
 
-let rem = document.getElementByClass("deleteme")
+let rem = document.getElementsByClassName("deleteme")
 
 for( let i=0; i< rem.length; i++ )
   rem[i].innerHTML = ""
@@ -87,6 +95,8 @@ periodic_table.useMiniMode = true;
 periodic_table.setEnableSelect(true)
   .setDisplayedComponents(['symbol', 'name', 'atomicNumber'])
   .appendToElem(div);
+
+console.log("plotting: ", `@0`)
 </script>
 @end
 -->
