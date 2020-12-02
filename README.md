@@ -54,7 +54,7 @@ console.log("plotting: ", `@0`)
 let rem = document.getElementsByClassName("deleteme")
 
 for( let i=0; i< rem.length; i++ )
-  rem[i].innerHTML = ""
+  rem[i].innerHTML = "";
 
 const div = document.getElementById("molecule_parent2_@1");
 
@@ -74,23 +74,26 @@ console.log("plotting: ",  rawData)
 </script>
 @end
 
-@Kekule.periodicTable: @_periodicTable_(@uid)
+@Kekule.periodicTable: @_periodicTable_(@0, @uid)
 
 @_periodicTable_
-<div style="text-align: center" id="periodic_table_@0" class="deleteme"></div>
+<div style="text-align: center" id="periodic_table_@1" class="deleteme"></div>
 
 <script>
 
 let rem = document.getElementsByClassName("deleteme")
 
 for( let i=0; i< rem.length; i++ )
-  rem[i].innerHTML = ""
+  rem[i].innerHTML = "";
 
-const div = document.getElementById("periodic_table_@0");
+const div = document.getElementById("periodic_table_@1");
 
 const periodic_table = new Kekule.ChemWidget.PeriodicTable(document);
 
-periodic_table.useMiniMode = true;
+if("@0" !== "large")
+  periodic_table.useMiniMode = true;
+else
+  periodic_table.useMiniMode = false;
 
 periodic_table.setEnableSelect(true)
   .setDisplayedComponents(['symbol', 'name', 'atomicNumber'])
@@ -102,6 +105,12 @@ console.log("plotting: ", `@0`)
 -->
 
 # Kekelu JS
+
+Implementation of the the JS library KekuleJS which provides tool for rendering
+molecules and much more chemical notation.
+
+[KekuleJS Source](https://github.com/partridgejiang/Kekule.js/tree/master) <br>
+[LiaScript Page](https://liascript.github.io/course/?https://raw.githubusercontent.com/liaTemplates/KekuleJS/master/README.md#1)
 
 # `@Kekule.molecule2d`
 
@@ -290,8 +299,14 @@ The code above gets interpreted as this molecule:
 ```
 
 # `@Kekule.periodicTable`
-
 This macro adds a periodic table to the current liaScript page.
-(It has no arguments).
 
+The first argument of the macro can be used for making the table large.
+Simply type large into the brackets after the macro.
+It is not recommended to put more than one table on the same page.
+
+## `@Kekule.periodicTable - small`
 @Kekule.periodicTable
+
+## `@Kekule.periodicTable(large) - large`
+@Kekule.periodicTable(large)
