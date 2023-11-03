@@ -21,9 +21,9 @@ link:   https://cdn.jsdelivr.net/gh/LiaTemplates/KekuleJS/kekule/themes/default/
 
 @Kekule.load2d: @Kekule._load2d(@uid,@0,@1)
 
-@Kekule._load2d
-<div style="text-align: center" id="molecule_parent1_@0" class="deleteme"></div>
+@Kekule.eval2d: @Kekule._load2d(@uid,@0,`@input`)
 
+@Kekule._load2d
 <script>
 let rem = document.getElementsByClassName("deleteme")
 
@@ -40,18 +40,20 @@ viewer.removeClassName(Kekule.Widget.HtmlClassNames.NORMAL_BACKGROUND);
 
 div.appendChild(viewer.getElement());
 
-console.log("plotting: ", `@2`)
+"LIA: stop"
 </script>
+
+<div style="text-align: center" id="molecule_parent1_@0" class="deleteme"></div>
 @end
 
 
 @Kekule.molecule3d: @Kekule._load3d(@uid,cml,@0)
 
+@Kekule.eval3d: @Kekule._load3d(@uid,@0,`@input`)
+
 @Kekule.load3d: @Kekule._load3d(@uid,@0,@1)
 
 @Kekule._load3d
-<div data-widget="Kekule.ChemWidget.Viewer" style="width: 100%; height: 550px;" id="molecule_parent2_@0" class="deleteme"></div>
-
 <script>
 let rem = document.getElementsByClassName("deleteme")
 
@@ -72,8 +74,10 @@ viewer.setRenderType(Kekule.Render.RendererType.R3D);
 viewer.setAutofit(true);
 viewer.setEnableToolbar(true);
 
-console.log("plotting: ",  rawData)
+"LIA: stop"
 </script>
+
+<div data-widget="Kekule.ChemWidget.Viewer" style="width: 100%; height: 550px;" id="molecule_parent2_@0" class="deleteme"></div>
 @end
 
 @Kekule.periodicTable: @_periodicTable_(@0, @uid)
@@ -382,3 +386,30 @@ Picture 1
   4  6  1  0  0  0  0
 M  END
 ```
+
+``` text
+Picture 1                                                                       
+  PPPPPPPP          3D                              
+
+  6 12  0  0  0  0  0  0  0  0  0     
+    0.0000    1.8079    1.8079 Cu  0  0  0  1
+    3.6157    1.8079    1.8079 Cu  0  0  0  1
+    1.8079    0.0000    1.8079 Cu  0  0  0  1
+    1.8079    3.6157    1.8079 Cu  0  0  0  1
+    1.8079    1.8079    0.0000 Cu  0  0  0  1
+    1.8079    1.8079    3.6157 Cu  0  0  0  1
+  1  3  1  0  0  0  0
+  1  4  1  0  0  0  0
+  1  5  1  0  0  0  0
+  1  6  1  0  0  0  0
+  2  3  1  0  0  0  0
+  2  4  1  0  0  0  0
+  2  5  1  0  0  0  0
+  2  6  1  0  0  0  0
+  3  5  1  0  0  0  0
+  3  6  1  0  0  0  0
+  4  5  1  0  0  0  0
+  4  6  1  0  0  0  0
+M  END
+```
+@Kekule.eval3d(mol)
