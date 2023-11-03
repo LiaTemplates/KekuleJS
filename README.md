@@ -17,10 +17,12 @@ link:   https://cdn.jsdelivr.net/gh/LiaTemplates/KekuleJS/kekule/themes/default/
 
 
 
-@Kekule.molecule2d: @_molecule2d_(@0, @uid)
+@Kekule.molecule2d: @Kekule._load2d(@uid,cml,@0)
 
-@_molecule2d_
-<div style="text-align: center" id="molecule_parent1_@1" class="deleteme"></div>
+@Kekule.load2d: @Kekule._load2d(@uid,@0,@1)
+
+@Kekule._load2d
+<div style="text-align: center" id="molecule_parent1_@0" class="deleteme"></div>
 
 <script>
 let rem = document.getElementsByClassName("deleteme")
@@ -28,27 +30,27 @@ let rem = document.getElementsByClassName("deleteme")
 for( let i=0; i< rem.length; i++ )
   rem[i].innerHTML = ""
 
-const div = document.getElementById("molecule_parent1_@1");
+const div = document.getElementById("molecule_parent1_@0");
 
-const rawData = `@0`;
-const mol = Kekule.IO.loadFormatData(rawData, 'cml');
+const rawData = `@2`;
+const mol = Kekule.IO.loadFormatData(rawData, '@1');
 var viewer = new Kekule.ChemWidget.Viewer2D(document, mol);
 
 viewer.removeClassName(Kekule.Widget.HtmlClassNames.NORMAL_BACKGROUND);
 
 div.appendChild(viewer.getElement());
 
-console.log("plotting: ", `@0`)
+console.log("plotting: ", `@2`)
 </script>
 @end
 
 
+@Kekule.molecule3d: @Kekule._load3d(@uid,cml,@0)
 
+@Kekule.load3d: @Kekule._load3d(@uid,@0,@1)
 
-@Kekule.molecule3d: @_molecule3d_(@0,@uid)
-
-@_molecule3d_
-<div data-widget="Kekule.ChemWidget.Viewer" style="width: 100%; height: 550px;" id="molecule_parent2_@1" class="deleteme"></div>
+@Kekule._load3d
+<div data-widget="Kekule.ChemWidget.Viewer" style="width: 100%; height: 550px;" id="molecule_parent2_@0" class="deleteme"></div>
 
 <script>
 let rem = document.getElementsByClassName("deleteme")
@@ -56,10 +58,10 @@ let rem = document.getElementsByClassName("deleteme")
 for( let i=0; i< rem.length; i++ )
   rem[i].innerHTML = "";
 
-const div = document.getElementById("molecule_parent2_@1");
+const div = document.getElementById("molecule_parent2_@0");
 
-const rawData = `@0`;
-let mol = Kekule.IO.loadFormatData(rawData, 'cml');
+const rawData = `@2`;
+let mol = Kekule.IO.loadFormatData(rawData, '@1');
 
 var viewer = new Kekule.ChemWidget.Viewer(div);
 
@@ -352,3 +354,31 @@ LiaScript has a special syntax for urls, if you want to pass a URL that should b
 
 @[Kekule.load](data/example.mol)
 
+
+## Loading Files with `@Kekule.load3d`
+
+``` text @Kekule.load3d(mol)
+Picture 1                                                                       
+  PPPPPPPP          3D                              
+
+  6 12  0  0  0  0  0  0  0  0  0     
+    0.0000    1.8079    1.8079 Cu  0  0  0  1
+    3.6157    1.8079    1.8079 Cu  0  0  0  1
+    1.8079    0.0000    1.8079 Cu  0  0  0  1
+    1.8079    3.6157    1.8079 Cu  0  0  0  1
+    1.8079    1.8079    0.0000 Cu  0  0  0  1
+    1.8079    1.8079    3.6157 Cu  0  0  0  1
+  1  3  1  0  0  0  0
+  1  4  1  0  0  0  0
+  1  5  1  0  0  0  0
+  1  6  1  0  0  0  0
+  2  3  1  0  0  0  0
+  2  4  1  0  0  0  0
+  2  5  1  0  0  0  0
+  2  6  1  0  0  0  0
+  3  5  1  0  0  0  0
+  3  6  1  0  0  0  0
+  4  5  1  0  0  0  0
+  4  6  1  0  0  0  0
+M  END
+```
