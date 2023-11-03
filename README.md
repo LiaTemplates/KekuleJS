@@ -102,6 +102,35 @@ periodic_table.setEnableSelect(true)
 console.log("plotting: ", `@0`)
 </script>
 @end
+
+
+@Kekule.load: @Kekule.load_(@uid,@0)
+
+@Kekule.load_
+<div id="structureContainer_@0"></div>
+
+<script>
+// Load the XYZ file from a URL
+Kekule.IO.loadUrlData('@1', (mol, success) => {
+if (!success) {
+  document.getElementById("structureContainer_@0").innerHTML = 'Failed to load @1';
+  return;
+}
+
+var viewer = new Kekule.ChemWidget.Viewer(document);
+viewer.setDimension('100%', '60vh');
+viewer.appendToElem(document.getElementById('structureContainer_@0')).setChemObj(mol);  
+viewer.setAutofit(true);
+viewer.setEnableToolbar(true);
+viewer.setRenderType(Kekule.Render.RendererType.R3D);
+});
+
+console.log("loading file", Kekule)
+
+</script>
+
+@end
+
 -->
 
 # Kekelu JS
@@ -144,7 +173,7 @@ block.
 
 The code above gets interpreted as this molecule:
 
-``` @Kekule.molecule2d
+``` xml @Kekule.molecule2d
 <cml xmlns="http://www.xml-cml.org/schema">
   <molecule>
     <atomArray>
@@ -306,7 +335,20 @@ Simply type large into the brackets after the macro.
 It is not recommended to put more than one table on the same page.
 
 ## `@Kekule.periodicTable - small`
+
 @Kekule.periodicTable
 
 ## `@Kekule.periodicTable(large) - large`
+
 @Kekule.periodicTable(large)
+
+## Loading Files with `@Kekule.load`
+
+LiaScript has a special syntax for urls, if you want to pass a URL that should be also a link in ordinary Markdown, simply add an `@` in front of the link:
+
+`@[Kekule.load](/data/example.mol)`
+
+---
+
+@[Kekule.load](/data/example.mol)
+
