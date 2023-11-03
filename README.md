@@ -350,5 +350,5 @@ LiaScript has a special syntax for urls, if you want to pass a URL that should b
 
 ---
 
-@[Kekule.load](/data/example.mol)
+@[Kekule.load](data/example.mol)
 
